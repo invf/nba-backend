@@ -1,0 +1,1 @@
+export { default } from "file:///C:/Users/HP/PycharmProjects/bestsports/nba_live/frontend/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live NBA Scoreboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: white;
+        }
+        .scoreboard {
+            margin: 20px auto;
+            padding: 10px;
+            background: #1e1e1e;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.5);
+        }
+        .game {
+            font-size: 20px;
+            margin: 10px 0;
+            border-bottom: 1px solid #ffcc00;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏀 Live NBA Scoreboard</h1>
+    <div id="scoreboard" class="scoreboard">
+        <p>Очікуємо оновлення...</p>
+    </div>
+
+    <script>
+        const socket = new WebSocket("ws://127.0.0.1:8001/ws/live_games/");
+
+        socket.onopen = () => {
+            console.log("✅ WebSocket підключено!");
+        };
+
+        socket.onmessage = (event) => {
+            const games = JSON.parse(event.data);
+            console.log("📡 Отримані дані:", games);
+
+            const scoreboard = document.getElementById("scoreboard");
+            scoreboard.innerHTML = "";  // Очищуємо старі дані
+
+            games.forEach(game => {
+                const gameElement = document.createElement("div");
+                gameElement.classList.add("game");
+                gameElement.innerHTML = `<b>${game.away_team}</b> ${game.away_score} - ${game.home_score} <b>${game.home_team}</b>`;
+                scoreboard.appendChild(gameElement);
+            });
+        };
+
+        socket.onerror = (error) => {
+            console.error("🚨 Помилка WebSocket:", error);
+        };
+    </script>
+</body>
+</html>

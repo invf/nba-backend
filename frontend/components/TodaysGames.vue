@@ -84,7 +84,7 @@ const goToGame = (gameId) => {
 // ✅ Запит до API перед WebSocket
 const fetchGames = async () => {
   try {
-    const response = await fetch("http://91.90.195.32:8000/api/todays_games/");
+    const response = await fetch("https://nba-backend-p2yt.onrender.com/api/todays_games/");
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();
 

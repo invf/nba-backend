@@ -56,7 +56,7 @@ const currentDate = ref(new Date().toLocaleDateString());
 let socket = null;
 
 const connectWebSocket = () => {
-  socket = new WebSocket("ws://127.0.0.1:8001/ws/quarter_stats/");
+  socket = new WebSocket("wss://nba-backend-p2yt.onrender.com/ws/quarter_stats/");
 
   socket.onopen = () => console.log("✅ WebSocket connected to quarter stats");
 

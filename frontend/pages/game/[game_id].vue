@@ -140,7 +140,7 @@ const getTeamLogo = (teamName) => {
 
 // ✅ WebSocket-з'єднання
 const connectWebSocket = () => {
-  socket = new WebSocket(`ws://127.0.0.1:8001/ws/game/${gameId}/`);
+  socket = new WebSocket(`wss://nba-backend-p2yt.onrender.com/ws/game/${gameId}/`);
 
   socket.onopen = () => console.log("✅ WebSocket connected");
 
